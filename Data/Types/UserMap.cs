@@ -11,7 +11,24 @@ namespace Data.Types
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<User> builder)
         {
-            throw new NotImplementedException();
+             builder.ToTable("user");
+
+            builder.Property(i => i.Id)
+                .HasColumnName("id");
+
+            builder.HasKey(i => i.Id);
+
+            builder.Property(i => i.Username)
+                .HasColumnName("userName")
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(80)
+                .IsRequired();
+
+            builder.Property(i => i.Password)
+                .HasColumnName("password")
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(80)
+                .IsRequired();
         }
     }
 }
