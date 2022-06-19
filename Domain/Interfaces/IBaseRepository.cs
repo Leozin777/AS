@@ -11,7 +11,7 @@ namespace Domain.Interfaces
         Task<T> GetyIdAsync(int id);
         Task<List<T>> GetAllAsync();
         void Save(T t);
-        void Delete(int idT);
+        bool Delete(int idT);
         void Update(T t);
     }
 }

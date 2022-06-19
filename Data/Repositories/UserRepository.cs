@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Data.Context;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
@@ -16,29 +17,38 @@ namespace Data.Repositories
             this._context = context;
         }
         
-        public void Delete(int idT)
+        public bool Delete(int idT)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(x => x.Id == idT);
+
+            if(user == null)
+                return false;
+            else
+            {
+                _context.Users.Remove(user);
+                return true;
+            }    
         }
 
-        public Task<List<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Users.ToListAsync();
         }
 
-        public Task<User> GetyIdAsync(int id)
+        public async Task<User> GetyIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Users.SingleOrDefaultAsync(x => x.Id == id);
+           
         }
 
         public void Save(User t)
         {
-            throw new NotImplementedException();
+            _context.Users.Add(t);
         }
 
         public void Update(User t)
         {
-            throw new NotImplementedException();
+            _context.Entry(t).State = EntityState.Modified;
         }
     }
 }
