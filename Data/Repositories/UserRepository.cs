@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Data.Context;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -11,44 +7,44 @@ namespace Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DataContext _context;
+        private readonly DataContext context;
         public UserRepository(DataContext context)
         {
-            this._context = context;
+            this.context = context;
         }
         
         public bool Delete(int idT)
         {
-            var user = _context.Users.FirstOrDefault(x => x.Id == idT);
+            var user = context.Users.FirstOrDefault(i => i.Id == idT);
 
-            if(user == null)
+            if (user == null)
                 return false;
             else
             {
-                _context.Users.Remove(user);
+                context.Users.Remove(user);
                 return true;
-            }    
+            }
         }
 
         public async Task<List<User>> GetAllAsync()
         {
-            return await _context.Users.ToListAsync();
+            return await context.Users.ToListAsync();
         }
 
-        public async Task<User> GetyIdAsync(int id)
+        public async Task<User> GetByIdAsync(int id)
         {
-            return await _context.Users.SingleOrDefaultAsync(x => x.Id == id);
-           
+            return await context.Users.SingleOrDefaultAsync(i => i.Id == id);
         }
 
         public void Save(User t)
         {
-            _context.Users.Add(t);
+            context.Users.Add(t);
         }
 
         public void Update(User t)
         {
-            _context.Entry(t).State = EntityState.Modified;
+            context.Entry(t).State = EntityState.Modified;
+
         }
     }
 }

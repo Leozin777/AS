@@ -8,7 +8,7 @@ namespace Domain.Interfaces
     public interface IBaseRepository<T>
     where T:class
     {
-        Task<T> GetyIdAsync(int id);
+        Task<T> GetByIdAsync(int id);
         Task<List<T>> GetAllAsync();
         void Save(T t);
         bool Delete(int idT);

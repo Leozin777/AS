@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Data.Context;
 using Domain.Interfaces;
 
@@ -25,6 +21,13 @@ namespace Data.Repositories
         public IUserRepository UserRepository
         {
             get{ return _userRepository ??= new UserRepository(_context);}
+        }
+
+        private IItemRepository _itemRepository;
+
+        public IItemRepository ItemRepository
+        {
+            get{ return _itemRepository ??= new ItemRepository(_context);}
         }
     }
 }
