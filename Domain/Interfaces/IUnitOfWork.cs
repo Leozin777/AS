@@ -9,6 +9,7 @@ namespace Domain.Interfaces
     {
         Task CommitAsync();
 
-        IUserRepository UserRepository{get;}
+        IUserRepository UserRepository {get;}
+        IItemRepository ItemRepository {get;}
     }
 }

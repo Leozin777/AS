@@ -26,5 +26,12 @@ namespace Data.Repositories
         {
             get{ return _userRepository ??= new UserRepository(_context);}
         }
+
+        private IItemRepository _itemRepository;
+
+        public IItemRepository ItemRepository
+        {
+            get{ return _itemRepository ??= new ItemRepository(_context);}
+        }
     }
 }

@@ -8,43 +8,43 @@ using Domain.Interfaces;
 
 namespace Data.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class ItemRepository: IItemRepository
     {
         private readonly DataContext _context;
-        public UserRepository(DataContext context)
+        public ItemRepository(DataContext context)
         {
             this._context = context;
         }
-        
+
         public bool Delete(int idT)
         {
-            var user = context.Users.FirstOrDefault(i => i.Id == idT);
+            var item = context.Items.FirstOrDefault(i => i.Id == idT);
 
-            if (user == null)
+            if (item == null)
                 return false;
             else
             {
-                context.Users.Remove(user);
+                context.Items.Remove(item);
                 return true;
             }
         }
 
-        public Task<List<User>> GetAllAsync()
+        public Task<List<Item>> GetAllAsync()
         {
-            return await context.Users.ToListAsync();
+            return await context.Items.ToListAsync();
         }
 
-        public Task<User> GetByIdAsync(int id)
+        public Task<Item> GetByIdAsync(int id)
         {
-            return await context.Users.SingleOrDefaultAsync(i => i.Id == id);
+            return await context.Items.SingleOrDefaultAsync(i => i.Id == id);
         }
 
-        public void Save(User t)
+        public void Save(Item t)
         {
             context.Add(t)
         }
 
-        public void Update(User t)
+        public void Update(Item t)
         {
             context.Entry(t).State = EntityState.Modified;
         }
