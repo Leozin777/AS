@@ -38,12 +38,13 @@ namespace Data.Repositories
 
         public void Save(User t)
         {
-            context.Add(t);
+            context.Users.Add(t);
         }
 
         public void Update(User t)
         {
             context.Entry(t).State = EntityState.Modified;
+
         }
     }
 }
