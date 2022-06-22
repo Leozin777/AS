@@ -41,7 +41,7 @@ namespace Data.Repositories
 
         public void Save(Item t)
         {
-            context.Add(t)
+            context.Add(t);
         }
 
         public void Update(Item t)
