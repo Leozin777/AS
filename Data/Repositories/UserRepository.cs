@@ -1,44 +1,49 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Data.Context;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DataContext _context;
+        private readonly DataContext context;
         public UserRepository(DataContext context)
         {
-            this._context = context;
+            this.context = context;
         }
         
-        public void Delete(int idT)
+        public bool Delete(int idT)
         {
-            throw new NotImplementedException();
+            var user = context.Users.FirstOrDefault(i => i.Id == idT);
+
+            if (user == null)
+                return false;
+            else
+            {
+                context.Users.Remove(user);
+                return true;
+            }
         }
 
-        public Task<List<User>> GetAllAsync()
+        public async Task<List<User>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await context.Users.ToListAsync();
         }
 
-        public Task<User> GetyIdAsync(int id)
+        public async Task<User> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await context.Users.SingleOrDefaultAsync(i => i.Id == id);
         }
 
         public void Save(User t)
         {
-            throw new NotImplementedException();
+            context.Add(t);
         }
 
         public void Update(User t)
         {
-            throw new NotImplementedException();
+            context.Entry(t).State = EntityState.Modified;
         }
     }
 }
