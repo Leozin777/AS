@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Data.Context;
 using Domain.Entities;
 using Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
     public class ItemRepository: IItemRepository
     {
-        private readonly DataContext _context;
+        private readonly DataContext context;
         public ItemRepository(DataContext context)
         {
-            this._context = context;
+            this.context = context;
         }
 
         public bool Delete(int idT)
@@ -29,19 +30,19 @@ namespace Data.Repositories
             }
         }
 
-        public Task<List<Item>> GetAllAsync()
+        public async Task<List<Item>> GetAllAsync()
         {
             return await context.Items.ToListAsync();
         }
 
-        public Task<Item> GetByIdAsync(int id)
+        public async Task<Item> GetByIdAsync(int id)
         {
             return await context.Items.SingleOrDefaultAsync(i => i.Id == id);
         }
 
         public void Save(Item t)
         {
-            context.Add(t)
+            context.Add(t);
         }
 
         public void Update(Item t)
