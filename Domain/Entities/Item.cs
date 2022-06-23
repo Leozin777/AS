@@ -12,13 +12,5 @@ namespace Domain.Entities
         public double Price { get; set; }
         public string Link { get; set; }
 
-        public Item(int id, string name, double price, string link) 
-        {
-            this.Id = id;
-            this.Name = name;
-            this.Price = price;
-            this.Link = link;  
-        }
-
     }
 }

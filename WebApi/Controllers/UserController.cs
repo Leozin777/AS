@@ -63,7 +63,7 @@ namespace WebApi.Controllers
         [HttpPost("v1/users")]
         public async Task<IActionResult> PostAsync([FromBody] UserViewModel model)
         {
-            var user = new User()
+            var user = new User
             {
                 Username = model.Username,
                 Password = model.Password,
