@@ -29,6 +29,12 @@ namespace Data.Types
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(80)
                 .IsRequired();
+                
+            builder.Property(i => i.Email)
+                .HasColumnName("email")
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(80)
+                .IsRequired();  
         }
     }
 }
