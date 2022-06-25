@@ -32,12 +32,17 @@ namespace WebApi.Controllers
                 var itemDTO = new ItemDTO()
                 {
                     Id = item.Id,
-                    Name = item.Name,
+                    Products = item.Products,
+                    Amount = item.Amount,
                     Price = item.Price,
+                    Request = item.Request,
+                    Missing = item.Missing
+
                 };
 
                 itemsDTO.Add(itemDTO);
             }
+
 
             return Ok(itemsDTO);
         }
@@ -54,8 +59,11 @@ namespace WebApi.Controllers
                 var itemDTO = new ItemDTO()
                 {
                     Id = item.Id,
-                    Name = item.Name,
+                    Products = item.Products,
+                    Amount = item.Amount,
                     Price = item.Price,
+                    Request = item.Request,
+                    Missing = item.Missing
                 };
 
                 return Ok(itemDTO);
@@ -67,8 +75,11 @@ namespace WebApi.Controllers
         {
             var item = new Item
             {
-                Name = model.Name,
+                Products = model.Products,
+                Amount = model.Amount,
                 Price = model.Price,
+                Request = model.Request,
+                Missing = model.Missing
             };
 
             _repository.Save(item);
@@ -76,7 +87,7 @@ namespace WebApi.Controllers
 
             return Ok(new
             {
-                message = "Item " + item.Name + " foi adicionado com sucesso!"
+                message = "Itens " + item.Products + " foram adicionados com sucesso!"
             });
         }
 
@@ -101,17 +112,22 @@ namespace WebApi.Controllers
                 return NotFound();
             else
             {
-                item.Name = model.Name;
+                item.Products = model.Products;
+                item.Amount = model.Amount;
                 item.Price = model.Price;
+                item.Request = model.Request;
+                item.Missing = model.Missing;
 
                 _repository.Update(item);
                 await _unitOfWork.CommitAsync();
 
                 var itemDTO = new ItemDTO()
                 {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Price = item.Price,
+                    Products = model.Products,
+                    Amount = model.Amount,
+                    Price = model.Price,
+                    Request = model.Request,
+                    Missing = model.Missing
                 };
 
                 return Ok(itemDTO);

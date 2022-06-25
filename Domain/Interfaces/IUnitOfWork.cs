@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
@@ -11,6 +7,8 @@ namespace Domain.Interfaces
 
         IClientRepository ClientRepository {get;}
         IItemRepository ItemRepository {get;}
-        IStoreRepository IStoreRepository { get; }
+        IStoreRepository StoreRepository { get;}
+        IRequestRepository RequestRepository {get;}
+        IProductRepository ProductRepository {get;}
     }
 }
