@@ -1154,19 +1154,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/mellanigarzon/.nuget/packages/": {}
+    "C:\\Users\\leobo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mellanigarzon/Desktop/Development/Facul/POO-C#/AS/Data/Data.csproj",
+      "projectUniqueName": "C:\\Users\\leobo\\Desktop\\Estudos\\POO-2022-1\\AS\\AS\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "/Users/mellanigarzon/Desktop/Development/Facul/POO-C#/AS/Data/Data.csproj",
-      "packagesPath": "/Users/mellanigarzon/.nuget/packages/",
-      "outputPath": "/Users/mellanigarzon/Desktop/Development/Facul/POO-C#/AS/Data/obj/",
+      "projectPath": "C:\\Users\\leobo\\Desktop\\Estudos\\POO-2022-1\\AS\\AS\\Data\\Data.csproj",
+      "packagesPath": "C:\\Users\\leobo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\leobo\\Desktop\\Estudos\\POO-2022-1\\AS\\AS\\Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/mellanigarzon/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\leobo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -1178,8 +1178,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "/Users/mellanigarzon/Desktop/Development/Facul/POO-C#/AS/Domain/Domain.csproj": {
-              "projectPath": "/Users/mellanigarzon/Desktop/Development/Facul/POO-C#/AS/Domain/Domain.csproj"
+            "C:\\Users\\leobo\\Desktop\\Estudos\\POO-2022-1\\AS\\AS\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\leobo\\Desktop\\Estudos\\POO-2022-1\\AS\\AS\\Domain\\Domain.csproj"
             }
           }
         }
@@ -1222,7 +1222,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

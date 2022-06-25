@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.DTOs;
 using WebApi.ViewModels;
 
-namespace WebApi.Controllers;
+namespace WebApi.Controllers
 {
     [Route("api/")]
     public class PaymentController : ControllerBase
