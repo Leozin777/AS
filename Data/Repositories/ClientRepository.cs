@@ -5,43 +5,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class ClientRepository : IClientRepository
     {
         private readonly DataContext context;
-        public UserRepository(DataContext context)
+        public ClientRepository(DataContext context)
         {
             this.context = context;
         }
         
         public bool Delete(int idT)
         {
-            var user = context.Users.FirstOrDefault(i => i.Id == idT);
+            var client = context.Clients.FirstOrDefault(i => i.Id == idT);
 
-            if (user == null)
+            if (client == null)
                 return false;
             else
             {
-                context.Users.Remove(user);
+                context.Clients.Remove(client);
                 return true;
             }
         }
 
-        public async Task<List<User>> GetAllAsync()
+        public async Task<List<Client>> GetAllAsync()
         {
-            return await context.Users.ToListAsync();
+            return await context.Clients.ToListAsync();
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<Client> GetByIdAsync(int id)
         {
-            return await context.Users.SingleOrDefaultAsync(i => i.Id == id);
+            return await context.Clients.SingleOrDefaultAsync(i => i.Id == id);
         }
 
-        public void Save(User t)
+        public void Save(Client t)
         {
-            context.Users.Add(t);
+            context.Clients.Add(t);
         }
 
-        public void Update(User t)
+        public void Update(Client t)
         {
             context.Entry(t).State = EntityState.Modified;
 

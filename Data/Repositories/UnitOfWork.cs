@@ -16,11 +16,11 @@ namespace Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        private IUserRepository _userRepository;
+        private IClientRepository _clientRepository;
 
-        public IUserRepository UserRepository
+        public IClientRepository ClientRepository
         {
-            get{ return _userRepository ??= new UserRepository(_context);}
+            get{ return _clientRepository ??= new ClientRepository(_context);}
         }
 
         private IItemRepository _itemRepository;
@@ -28,6 +28,13 @@ namespace Data.Repositories
         public IItemRepository ItemRepository
         {
             get{ return _itemRepository ??= new ItemRepository(_context);}
+        }
+
+        private IRequestRepository _requestRepository;
+
+        public IRequestRepository RequestRepository
+        {
+            get{ return _requestRepository ??= new RequestRepository(_context);}
         }
     }
 }

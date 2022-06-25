@@ -7,113 +7,120 @@ using WebApi.ViewModels;
 namespace WebApi.Controllers
 {
     [Route("api/")]
-    public class UserController : ControllerBase
+    public class ClientController : ControllerBase
     {
-        private readonly IUserRepository _repository;
+        private readonly IClientRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserController(
-            IUserRepository alunoRepository,
+        public ClientController(
+            IClientRepository clientRepository,
             IUnitOfWork unitOfWork)
         {
-            this._repository = alunoRepository;
+            this._repository = clientRepository;
             this._unitOfWork = unitOfWork;
         }
 
-        [HttpGet("v1/users")]
+        [HttpGet("v1/clients")]
         public async Task<IActionResult> GetAllAsync()
         {
-            var usersList = await _repository.GetAllAsync();
+            var clientsList = await _repository.GetAllAsync();
 
-            List<UserDTO> usersDTO = new List<UserDTO>();
+            List<ClientDTO> clientsDTO = new List<ClientDTO>();
 
-            foreach (User user in usersList)
+            foreach (Client client in clientsList)
             {
-                var userDTO = new UserDTO()
+                var clientDTO = new ClientDTO()
                 {
-                    Id = user.Id,
-                    Username = user.Username
+                    Id = client.Id,
+                    Name = client.Name,
+                    PhoneNumber = client.PhoneNumber,
+                    CPF = client.CPF,
+                    DateLastPurchase = client.DateLastPurchase
                 };
 
-                usersDTO.Add(userDTO);
+                clientsDTO.Add(clientDTO);
             }
 
-            return Ok(usersDTO);
+            return Ok(clientsDTO);
         }
 
-        [HttpGet("v1/users/{id:int}")]
+        [HttpGet("v1/clients/{id:int}")]
         public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
         {
-            var user = await _repository.GetByIdAsync(id);
+            var client = await _repository.GetByIdAsync(id);
 
-            if (user == null)
+            if (client == null)
                 return NotFound();
             else
             {
-                var userDTO = new UserDTO()
+                var clientDTO = new ClientDTO()
                 {
-                    Id = user.Id,
-                    Username = user.Username
+                    Id = client.Id,
+                    Name = client.Name,
+                    PhoneNumber = client.PhoneNumber,
+                    CPF = client.CPF,
+                    DateLastPurchase = client.DateLastPurchase,
+                    Requests = client.Requests
                 };
 
-                return Ok(userDTO);
+                return Ok(clientDTO);
             }
         }
 
-        [HttpPost("v1/users")]
-        public async Task<IActionResult> PostAsync([FromBody] UserViewModel model)
+        [HttpPost("v1/clients")]
+        public async Task<IActionResult> PostAsync([FromBody] ClientViewModel model)
         {
-            var user = new User
+            var client = new Client
             {
-                Username = model.Username,
-                Password = model.Password,
-                Email = model.Email
+                Name = model.Name,
+                PhoneNumber = model.PhoneNumber,
+                CPF = model.CPF,
+                DateLastPurchase = model.dateLastPurchase
             };
 
-            _repository.Save(user);
+            _repository.Save(client);
             await _unitOfWork.CommitAsync();
 
             return Ok(new
             {
-                message = "User " + user.Username + " foi adicionado com sucesso!"
+                message = "Cliente " + client.Name + " foi adicionado com sucesso!"
             });
         }
 
-        [HttpDelete("v1/users/{id:int}")]
+        [HttpDelete("v1/clients/{id:int}")]
         public async Task<IActionResult> DeleteAsync([FromRoute] int id)
         {
-            var userDeleted = _repository.Delete(id);
+            var clientDeleted = _repository.Delete(id);
             await _unitOfWork.CommitAsync();
 
-            if (userDeleted == false)
+            if (clientDeleted == false)
                 return NotFound();
             else
                 return Ok(id);
         }
 
-        [HttpPatch("v1/users/{id:int}")] //vai editar uma pessoa de acordo com o id informado e com os dados alterados
-        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] UserViewModel model)
+        [HttpPatch("v1/clients/{id:int}")] //vai editar uma pessoa de acordo com o id informado e com os dados alterados
+        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] ClientViewModel model)
         {
-            var user = await _repository.GetByIdAsync(id);
+            var client = await _repository.GetByIdAsync(id);
 
-            if (user == null)
+            if (client == null)
                 return NotFound();
             else
             {
-                user.Username = model.Username;
-                user.Email = model.Email;
-                user.Password = model.Password;
+                client.Name = model.Name;
+                client.PhoneNumber = model.PhoneNumber;
 
-                _repository.Update(user);
+                _repository.Update(client);
                 await _unitOfWork.CommitAsync();
 
-                var userDTO = new UserDTO()
+                var clientDTO = new ClientDTO()
                 {
-                    Id = user.Id,
-                    Username = user.Username
+                    Id = client.Id,
+                    PhoneNumber = client.PhoneNumber
                 };
 
-                return Ok(userDTO);
+                return Ok(clientDTO);
             }
         }
     }
