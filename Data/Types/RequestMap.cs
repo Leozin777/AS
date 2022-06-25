@@ -39,6 +39,11 @@ namespace Data.Types
                 .WithMany(x => x.Requests)
                 .HasConstraintName("FK_Requests_Store")
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Payment)
+                .WithMany(x => x.Requests)
+                .HasForeignKey("FK_Requests_Payment")
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

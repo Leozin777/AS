@@ -11,5 +11,7 @@ namespace Domain.Entities
         public Store Store { get; set; }
         public int StoreId { get; set; }
         public List<Item> Items { get; set; }
+        public Payment Payment { get; set; }
+        public int PaymentId { get; set; }
     }
 }
