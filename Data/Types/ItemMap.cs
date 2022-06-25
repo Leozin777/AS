@@ -28,13 +28,6 @@ namespace Data.Types
                 .HasColumnName("price")   
                 .HasColumnType("DOUBLE") 
                 .IsRequired();
-
-            builder.Property(i => i.Link)
-                .HasColumnName("link")
-                .HasColumnType("VARCHAR")
-                .HasMaxLength(80)
-                .IsRequired();    
-
         }
     }
 }

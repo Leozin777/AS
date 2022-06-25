@@ -16,11 +16,11 @@ namespace Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        private IUserRepository _userRepository;
+        private IClientRepository _clientRepository;
 
-        public IUserRepository UserRepository
+        public IClientRepository ClientRepository
         {
-            get{ return _userRepository ??= new UserRepository(_context);}
+            get{ return _clientRepository ??= new ClientRepository(_context);}
         }
 
         private IItemRepository _itemRepository;
