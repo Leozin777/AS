@@ -10,8 +10,3 @@ namespace Domain.Entities
         public int ClientId { get; set; }
     }
 }
-
-// builder.HasOne(x => x.Client)
-//                 .WithMany(x => x.Requests)
-//                 .HasConstraintName("FK_Charge_Customer")
-//                 .OnDelete(DeleteBehavior.Restrict);

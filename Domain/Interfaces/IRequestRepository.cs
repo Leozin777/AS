@@ -2,7 +2,7 @@ using Domain.Entities;
 
 namespace Domain.Interfaces
 {
-    public interface IItemRepository : IBaseRepository<Item>
+    public interface IRequestRepository : IBaseRepository<Request>
     {
         
     }

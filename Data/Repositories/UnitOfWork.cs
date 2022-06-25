@@ -29,5 +29,12 @@ namespace Data.Repositories
         {
             get{ return _itemRepository ??= new ItemRepository(_context);}
         }
+
+        private IRequestRepository _requestRepository;
+
+        public IRequestRepository RequestRepository
+        {
+            get{ return _requestRepository ??= new RequestRepository(_context);}
+        }
     }
 }

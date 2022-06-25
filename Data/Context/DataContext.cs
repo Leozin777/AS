@@ -13,10 +13,12 @@ namespace Data.Context
 
         public DbSet<Client> Clients { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Request> Requests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ClientMap());
         }
+
     }
 }
