@@ -40,9 +40,15 @@ namespace Data.Types
                 .HasConstraintName("FK_Requests_Store")
                 .OnDelete(DeleteBehavior.Restrict);
 
+<<<<<<< HEAD
             builder.HasOne(x => x.Payment)
                 .WithMany(x => x.Requests)
                 .HasForeignKey("FK_Requests_Payment")
+=======
+            builder.HasOne(x => x.RequestHistory)
+                .WithMany(x => x.Requests)
+                .HasConstraintName("FK_Requests_RequestHistory")
+>>>>>>> e19fb1081680dae65a198c10cbb697f25b217d75
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
