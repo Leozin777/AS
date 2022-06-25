@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
@@ -9,6 +5,12 @@ namespace Domain.Interfaces
     {
         Task CommitAsync();
 
-        IUserRepository UserRepository{get;}
+        IClientRepository ClientRepository {get;}
+        IItemRepository ItemRepository {get;}
+        IStoreRepository StoreRepository { get;}
+        IRequestRepository RequestRepository {get;}
+        IProductRepository ProductRepository {get;}
+        
+        IRequestHistoryRepository RequestHistoryRepository {get;}
     }
 }
