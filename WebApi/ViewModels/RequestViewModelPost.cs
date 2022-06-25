@@ -1,10 +1,9 @@
-namespace Domain.Entities
-{
-    public class Request
-    {
-        public int Id { get; set; }
+using Domain.Entities;
+
+namespace WebApi.ViewModels{
+    public class RequestViewModelPost{
         public string Status { get; set; }
-        public double AmountItems { get; set; } // Valor total de items
+        public double AmountItems { get; set; }
         public int RequestDate { get; set; }
         public Client Client { get; set; }
         public int ClientId { get; set; }

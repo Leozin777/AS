@@ -15,6 +15,8 @@ namespace Data.Context
         public DbSet<Item> Items { get; set; }
         public DbSet<Request> Requests { get; set; }
 
+        public DbSet<Product> Products { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ClientMap());

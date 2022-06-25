@@ -1,7 +1,6 @@
 using Data.Context;
 using Domain.Entities;
 using Domain.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories
 {

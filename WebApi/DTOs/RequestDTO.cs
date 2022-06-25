@@ -1,10 +1,10 @@
-namespace Domain.Entities
-{
-    public class Request
-    {
+using Domain.Entities;
+
+namespace WebApi.DTOs{
+    public class RequestDTO{
         public int Id { get; set; }
         public string Status { get; set; }
-        public double AmountItems { get; set; } // Valor total de items
+        public double AmountItems { get; set; }
         public int RequestDate { get; set; }
         public Client Client { get; set; }
         public int ClientId { get; set; }

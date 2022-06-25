@@ -68,14 +68,14 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("v1/clients")]
-        public async Task<IActionResult> PostAsync([FromBody] ClientViewModel model)
+        public async Task<IActionResult> PostAsync([FromBody] ClientViewModelPost model)
         {
             var client = new Client
             {
                 Name = model.Name,
                 PhoneNumber = model.PhoneNumber,
                 CPF = model.CPF,
-                DateLastPurchase = model.dateLastPurchase
+                DateLastPurchase = model.DateLastPurchase
             };
 
             _repository.Save(client);
@@ -100,7 +100,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPatch("v1/clients/{id:int}")] //vai editar uma pessoa de acordo com o id informado e com os dados alterados
-        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] ClientViewModel model)
+        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] ClientViewModelPatch model)
         {
             var client = await _repository.GetByIdAsync(id);
 

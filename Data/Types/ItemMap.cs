@@ -14,16 +14,15 @@ namespace Data.Types
 
             builder.HasKey(i => i.Id);
 
-            builder.Property(i => i.Name)
-                .HasColumnName("name")
-                .HasColumnType("VARCHAR")
-                .HasMaxLength(80)
-                .IsRequired();
-
             builder.Property(i => i.Price)
                 .HasColumnName("price")   
                 .HasColumnType("DOUBLE") 
                 .IsRequired();
+
+            // builder.HasOne(x => x.Client)
+            //     .WithMany(x => x.Requests)
+            //     .HasConstraintName("FK_Requests_Client")
+            //     .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
