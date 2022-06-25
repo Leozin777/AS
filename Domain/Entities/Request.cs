@@ -11,5 +11,7 @@ namespace Domain.Entities
         public Store Store { get; set; }
         public int StoreId { get; set; }
         public List<Item> Items { get; set; }
+
+        public RequestHistory RequestHistory { get; set; }
     }
 }

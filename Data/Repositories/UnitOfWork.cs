@@ -43,5 +43,18 @@ namespace Data.Repositories
         {
             get{ return _productRepository ??= new ProductRepository(_context);}
         }
+
+        private IStoreRepository _storeRepository;
+         public IStoreRepository StoreRepository
+        {
+            get{ return _storeRepository ??= new StoreRepository(_context);}
+        }
+
+        private IRequestHistoryRepository _requestHistoryRepository;
+    
+         public IRequestHistoryRepository RequestHistoryRepository
+        {
+            get{ return _requestHistoryRepository ??= new RequestHistoryRepository(_context);}
+        }
     }
 }
