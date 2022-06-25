@@ -34,7 +34,6 @@ namespace WebApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Price = item.Price,
-                    Link = item.Link
                 };
 
                 itemsDTO.Add(itemDTO);
@@ -57,7 +56,6 @@ namespace WebApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Price = item.Price,
-                    Link = item.Link
                 };
 
                 return Ok(itemDTO);
@@ -71,7 +69,6 @@ namespace WebApi.Controllers
             {
                 Name = model.Name,
                 Price = model.Price,
-                Link = model.Link
             };
 
             _repository.Save(item);
@@ -105,7 +102,6 @@ namespace WebApi.Controllers
             else
             {
                 item.Name = model.Name;
-                item.Link = model.Link;
                 item.Price = model.Price;
 
                 _repository.Update(item);
@@ -116,7 +112,6 @@ namespace WebApi.Controllers
                     Id = item.Id,
                     Name = item.Name,
                     Price = item.Price,
-                    Link = item.Link
                 };
 
                 return Ok(itemDTO);
