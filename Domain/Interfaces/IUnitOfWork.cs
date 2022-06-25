@@ -11,5 +11,6 @@ namespace Domain.Interfaces
 
         IClientRepository ClientRepository {get;}
         IItemRepository ItemRepository {get;}
+        IStoreRepository IStoreRepository { get; }
     }
 }
