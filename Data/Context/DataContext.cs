@@ -14,12 +14,16 @@ namespace Data.Context
         public DbSet<Client> Clients { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Request> Requests { get; set; }
+        public DbSet<Store> Stores { get; set; }
 
         public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ClientMap());
+            modelBuilder.ApplyConfiguration(new ItemMap());
+            modelBuilder.ApplyConfiguration(new RequestMap());
+            modelBuilder.ApplyConfiguration(new Stores());
         }
 
     }

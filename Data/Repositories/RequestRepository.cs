@@ -14,27 +14,34 @@ namespace Data.Repositories
 
         public bool Delete(int idT)
         {
-            throw new NotImplementedException();
+            var request = context.Requests.FirstOrDefault(i => i.Id == idT);
+
+            if (request == null)
+                return false;
+            else
+            {
+                context.Requests.Remove(request);
+                return true;
+            }
         }
 
-        public Task<List<Request>> GetAllAsync()
+        public async Task<List<Request>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await context.Requests.ToListAsync();
         }
 
-        public Task<Request> GetByIdAsync(int id)
+        public async Task<Request> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await context.Requests.SingleOrDefaultAsync(i => i.Id == id);
         }
 
         public void Save(Request t)
         {
-            throw new NotImplementedException();
-        }
+            context.Requests.Add(t);        }
 
         public void Update(Request t)
         {
-            throw new NotImplementedException();
+            context.Entry(t).State = EntityState.Modified;
         }
     }
 }
