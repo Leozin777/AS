@@ -38,7 +38,7 @@ namespace Data.Types
             
             builder.Property(i => i.DateLastPurchase)
                 .HasColumnName("dateLastPurchase")
-                .HasColumnType("SMALLDATETIME")
+                .HasColumnType("DATE")
                 .IsRequired();
         }
     }
