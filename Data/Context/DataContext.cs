@@ -26,6 +26,7 @@ namespace Data.Context
             modelBuilder.ApplyConfiguration(new RequestMap());
             modelBuilder.ApplyConfiguration(new PaymentMap());
             modelBuilder.ApplyConfiguration(new StoreMap());
+            modelBuilder.ApplyConfiguration(new ProductMap());
             modelBuilder.ApplyConfiguration(new RequestHistoryMap());
         }
 

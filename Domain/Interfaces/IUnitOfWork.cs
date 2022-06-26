@@ -10,7 +10,7 @@ namespace Domain.Interfaces
         IStoreRepository StoreRepository { get;}
         IRequestRepository RequestRepository {get;}
         IProductRepository ProductRepository {get;}
-        
+        IPaymentRepository PaymentRepository {get; }
         IRequestHistoryRepository RequestHistoryRepository {get;}
     }
 }
