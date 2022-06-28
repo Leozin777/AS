@@ -21,7 +21,7 @@ namespace Data.Types
             
             builder.Property(i => i.Price)
                 .HasColumnName("price")   
-                .HasColumnType("DOUBLE") 
+                .HasColumnType("DECIMAL") 
                 .IsRequired();
             
             builder.Property(i => i.Missing)

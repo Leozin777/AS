@@ -17,7 +17,7 @@ namespace Data.Context
         public DbSet<Store> Stores { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<RequestHistory> RequestsHistory { get; set; }
+        public DbSet<Status> Status { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,7 @@ namespace Data.Context
             modelBuilder.ApplyConfiguration(new PaymentMap());
             modelBuilder.ApplyConfiguration(new StoreMap());
             modelBuilder.ApplyConfiguration(new ProductMap());
-            modelBuilder.ApplyConfiguration(new RequestHistoryMap());
+            modelBuilder.ApplyConfiguration(new StatusMap());
         }
 
     }

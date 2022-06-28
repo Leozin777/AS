@@ -1,10 +1,8 @@
 namespace Domain.Entities
 {
-    public class RequestHistory{
+    public class Status{
         public int Id { get; set; }
-
-        public bool Status { get; set; }
-
+        public string Name { get; set; }
         public List<Request> Requests { get; set; }
     }
 }

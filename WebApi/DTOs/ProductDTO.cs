@@ -7,6 +7,6 @@ namespace WebApi.DTOs{
         public string Name { get; set; }
         public int SoldAmount { get; set; }
         public Double QuantityKgSold { get; set; }
-        public Item Item { get; set; }
+         public int ItemId { get; set; }
     }
 }

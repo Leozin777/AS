@@ -57,10 +57,9 @@ namespace WebApi.Controllers
                 var storeDTO = new StoreDTO()
                 {
                     Id = store.Id,
-                    Address = store.Address,
                     Name = store.Name,
                     PhoneNumber = store.PhoneNumber,
-                    Requests = store.Requests
+                    Address = store.Address
                 };
 
                 return Ok(storeDTO);
@@ -117,7 +116,9 @@ namespace WebApi.Controllers
                 var storeDTO = new StoreDTO()
                 {
                     Id = store.Id,
-                    Name = model.Name
+                    Name = model.Name,
+                    PhoneNumber = model.PhoneNumber,
+                    Address = model.Address
                 };
 
                 return Ok(storeDTO);

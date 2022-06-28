@@ -35,7 +35,7 @@ namespace WebApi.Controllers
                     Name = product.Name,
                     SoldAmount = product.SoldAmount,
                     QuantityKgSold = product.QuantityKgSold,
-                    Item = product.Item
+                    ItemId = product.ItemId
                 };
 
                 productsDTO.Add(productDTO);
@@ -59,7 +59,7 @@ namespace WebApi.Controllers
                     Name = product.Name,
                     Price = product.Price,
                     SoldAmount = product.SoldAmount,
-                    Item = product.Item
+                    ItemId = product.ItemId
                 };
 
                 return Ok(productDTO);
@@ -74,7 +74,8 @@ namespace WebApi.Controllers
                 Name = model.Name,
                 Price = model.Price,
                 SoldAmount = model.SoldAmount,
-                Item = model.Item
+                QuantityKgSold = model.QuantityKgSold,
+                ItemId = model.ItemId
             };
 
             _repository.Save(product);
@@ -110,7 +111,8 @@ namespace WebApi.Controllers
                 product.Name = model.Name;
                 product.Price = model.Price;
                 product.SoldAmount = model.SoldAmount;
-                product.Item = model.Item;
+                product.QuantityKgSold = model.QuantityKgSold;
+                product.ItemId = model.ItemId;
 
                 _repository.Update(product);
                 await _unitOfWork.CommitAsync();
@@ -121,7 +123,7 @@ namespace WebApi.Controllers
                     Name = product.Name,
                     Price = product.Price,
                     SoldAmount = product.SoldAmount,
-                    Item = product.Item
+                    ItemId = product.ItemId
                 };
 
                 return Ok(productDTO);

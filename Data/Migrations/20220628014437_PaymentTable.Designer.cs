@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220626002238_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20220628014437_PaymentTable")]
+    partial class PaymentTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace Data.Migrations
                         .HasColumnName("CPF");
 
                     b.Property<DateTime>("DateLastPurchase")
-                        .HasColumnType("SMALLDATETIME")
+                        .HasColumnType("DATE")
                         .HasColumnName("dateLastPurchase");
 
                     b.Property<string>("Name")
@@ -77,8 +77,8 @@ namespace Data.Migrations
                         .HasColumnType("BOOLEAN")
                         .HasColumnName("missing");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("DOUBLE")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric(38,17)")
                         .HasColumnName("price");
 
                     b.Property<int>("RequestId")
@@ -120,7 +120,7 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("ItemId")
+                    b.Property<int>("ItemId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
@@ -129,12 +129,12 @@ namespace Data.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("name");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("DOUBLE")
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric(38,17)")
                         .HasColumnName("price");
 
-                    b.Property<double>("QuantityKgSold")
-                        .HasColumnType("DOUBLE")
+                    b.Property<decimal>("QuantityKgSold")
+                        .HasColumnType("numeric(38,17)")
                         .HasColumnName("quantityKgSold");
 
                     b.Property<int>("SoldAmount")
@@ -157,31 +157,22 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("AmountItems")
-                        .HasColumnType("DOUBLE")
+                    b.Property<decimal>("AmountItems")
+                        .HasColumnType("numeric(38,17)")
                         .HasColumnName("amountItems");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("FK_Requests_Payment")
-                        .HasColumnType("integer");
-
                     b.Property<int>("PaymentId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("RequestDate")
-                        .HasColumnType("SMALLDATETIME")
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("DATE")
                         .HasColumnName("requestDate");
 
-                    b.Property<int?>("RequestHistoryId")
+                    b.Property<int>("StatusId")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("VARCHAR")
-                        .HasColumnName("status");
 
                     b.Property<int>("StoreId")
                         .HasColumnType("integer");
@@ -190,16 +181,16 @@ namespace Data.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("FK_Requests_Payment");
+                    b.HasIndex("PaymentId");
 
-                    b.HasIndex("RequestHistoryId");
+                    b.HasIndex("StatusId");
 
                     b.HasIndex("StoreId");
 
                     b.ToTable("request", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.RequestHistory", b =>
+            modelBuilder.Entity("Domain.Entities.Status", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -208,13 +199,15 @@ namespace Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Status")
-                        .HasColumnType("BOOLEAN")
-                        .HasColumnName("status");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("VARCHAR")
+                        .HasColumnName("name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("requestHistory", (string)null);
+                    b.ToTable("status", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Store", b =>
@@ -267,6 +260,7 @@ namespace Data.Migrations
                         .WithMany("Products")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
                         .HasConstraintName("FK_Products_Item");
 
                     b.Navigation("Item");
@@ -283,15 +277,17 @@ namespace Data.Migrations
 
                     b.HasOne("Domain.Entities.Payment", "Payment")
                         .WithMany("Requests")
-                        .HasForeignKey("FK_Requests_Payment")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.RequestHistory", "RequestHistory")
-                        .WithMany("Requests")
-                        .HasForeignKey("RequestHistoryId")
+                        .HasForeignKey("PaymentId")
                         .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("FK_Requests_RequestHistory");
+                        .IsRequired()
+                        .HasConstraintName("FK_Requests_Payment");
+
+                    b.HasOne("Domain.Entities.Status", "Status")
+                        .WithMany("Requests")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_Requests_Status");
 
                     b.HasOne("Domain.Entities.Store", "Store")
                         .WithMany("Requests")
@@ -304,7 +300,7 @@ namespace Data.Migrations
 
                     b.Navigation("Payment");
 
-                    b.Navigation("RequestHistory");
+                    b.Navigation("Status");
 
                     b.Navigation("Store");
                 });
@@ -329,7 +325,7 @@ namespace Data.Migrations
                     b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("Domain.Entities.RequestHistory", b =>
+            modelBuilder.Entity("Domain.Entities.Status", b =>
                 {
                     b.Navigation("Requests");
                 });

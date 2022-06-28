@@ -56,11 +56,11 @@ namespace Data.Repositories
             get{ return _storeRepository ??= new StoreRepository(_context);}
         }
 
-        private IRequestHistoryRepository _requestHistoryRepository;
+        private IStatusRepository _statusRepository;
     
-         public IRequestHistoryRepository RequestHistoryRepository
+         public IStatusRepository StatusRepository
         {
-            get{ return _requestHistoryRepository ??= new RequestHistoryRepository(_context);}
+            get{ return _statusRepository ??= new StatusRepository(_context);}
         }
          
     }

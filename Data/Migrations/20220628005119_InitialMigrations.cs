@@ -19,7 +19,7 @@ namespace Data.Migrations
                     name = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false),
                     phoneNumber = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false),
                     CPF = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false),
-                    dateLastPurchase = table.Column<DateTime>(type: "SMALLDATETIME", nullable: false)
+                    dateLastPurchase = table.Column<DateTime>(type: "DATE", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -40,16 +40,16 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "requestHistory",
+                name: "status",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    status = table.Column<bool>(type: "BOOLEAN", nullable: false)
+                    name = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_requestHistory", x => x.id);
+                    table.PrimaryKey("PK_status", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,14 +73,13 @@ namespace Data.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    status = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false),
-                    amountItems = table.Column<double>(type: "DOUBLE", nullable: false),
-                    requestDate = table.Column<int>(type: "SMALLDATETIME", nullable: false),
+                    amountItems = table.Column<decimal>(type: "numeric(38,17)", nullable: false),
+                    requestDate = table.Column<DateTime>(type: "DATE", nullable: false),
                     ClientId = table.Column<int>(type: "integer", nullable: false),
                     StoreId = table.Column<int>(type: "integer", nullable: false),
                     FK_Requests_Payment = table.Column<int>(type: "integer", nullable: false),
                     PaymentId = table.Column<int>(type: "integer", nullable: false),
-                    RequestHistoryId = table.Column<int>(type: "integer", nullable: true)
+                    StatusId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -98,9 +97,9 @@ namespace Data.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Requests_RequestHistory",
-                        column: x => x.RequestHistoryId,
-                        principalTable: "requestHistory",
+                        name: "FK_Requests_Status",
+                        column: x => x.StatusId,
+                        principalTable: "status",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -118,9 +117,9 @@ namespace Data.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     amount = table.Column<int>(type: "INT", nullable: false),
-                    price = table.Column<double>(type: "DOUBLE", nullable: false),
-                    RequestId = table.Column<int>(type: "integer", nullable: false),
-                    missing = table.Column<bool>(type: "BOOLEAN", nullable: false)
+                    price = table.Column<decimal>(type: "numeric(38,17)", nullable: false),
+                    missing = table.Column<bool>(type: "BOOLEAN", nullable: false),
+                    RequestId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -139,11 +138,11 @@ namespace Data.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    price = table.Column<double>(type: "DOUBLE", nullable: false),
+                    price = table.Column<decimal>(type: "numeric(38,17)", nullable: false),
                     name = table.Column<string>(type: "VARCHAR", maxLength: 80, nullable: false),
                     soldAmount = table.Column<int>(type: "INT", nullable: false),
-                    quantityKgSold = table.Column<double>(type: "DOUBLE", nullable: false),
-                    ItemId = table.Column<int>(type: "integer", nullable: true)
+                    quantityKgSold = table.Column<decimal>(type: "numeric(38,17)", nullable: false),
+                    ItemId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -177,9 +176,9 @@ namespace Data.Migrations
                 column: "FK_Requests_Payment");
 
             migrationBuilder.CreateIndex(
-                name: "IX_request_RequestHistoryId",
+                name: "IX_request_StatusId",
                 table: "request",
-                column: "RequestHistoryId");
+                column: "StatusId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_request_StoreId",
@@ -205,7 +204,7 @@ namespace Data.Migrations
                 name: "client");
 
             migrationBuilder.DropTable(
-                name: "requestHistory");
+                name: "status");
 
             migrationBuilder.DropTable(
                 name: "store");

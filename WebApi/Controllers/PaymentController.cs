@@ -104,6 +104,7 @@ namespace WebApi.Controllers
 
                 var paymentDTO = new PaymentDTO()
                 {
+                    Id = payment.Id,
                     Description = payment.Description
                 };
 

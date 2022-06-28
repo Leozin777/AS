@@ -11,6 +11,6 @@ namespace Domain.Interfaces
         IRequestRepository RequestRepository {get;}
         IProductRepository ProductRepository {get;}
         IPaymentRepository PaymentRepository {get; }
-        IRequestHistoryRepository RequestHistoryRepository {get;}
+        IStatusRepository StatusRepository {get;}
     }
 }

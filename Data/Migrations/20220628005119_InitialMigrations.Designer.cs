@@ -3,6 +3,7 @@ using System;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220628005119_InitialMigrations")]
+    partial class InitialMigrations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,6 +164,9 @@ namespace Data.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("FK_Requests_Payment")
+                        .HasColumnType("integer");
+
                     b.Property<int>("PaymentId")
                         .HasColumnType("integer");
 
@@ -179,7 +184,7 @@ namespace Data.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("PaymentId");
+                    b.HasIndex("FK_Requests_Payment");
 
                     b.HasIndex("StatusId");
 
@@ -275,10 +280,9 @@ namespace Data.Migrations
 
                     b.HasOne("Domain.Entities.Payment", "Payment")
                         .WithMany("Requests")
-                        .HasForeignKey("PaymentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_Requests_Payment");
+                        .HasForeignKey("FK_Requests_Payment")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.Status", "Status")
                         .WithMany("Requests")
