@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "/Users/mellanigarzon/.nuget/packages/": {}
+    "C:\\Users\\leobo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mellanigarzon/Desktop/Development/Facul/POO-C#/AS/Domain/Domain.csproj",
+      "projectUniqueName": "C:\\Users\\leobo\\Desktop\\Estudos\\POO-2022-1\\AS\\AS\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "/Users/mellanigarzon/Desktop/Development/Facul/POO-C#/AS/Domain/Domain.csproj",
-      "packagesPath": "/Users/mellanigarzon/.nuget/packages/",
-      "outputPath": "/Users/mellanigarzon/Desktop/Development/Facul/POO-C#/AS/Domain/obj/",
+      "projectPath": "C:\\Users\\leobo\\Desktop\\Estudos\\POO-2022-1\\AS\\AS\\Domain\\Domain.csproj",
+      "packagesPath": "C:\\Users\\leobo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\leobo\\Desktop\\Estudos\\POO-2022-1\\AS\\AS\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/mellanigarzon/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\leobo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -58,7 +58,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/x64/sdk/6.0.300/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

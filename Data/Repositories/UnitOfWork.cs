@@ -1,4 +1,5 @@
 using Data.Context;
+using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Data.Repositories
@@ -56,9 +57,9 @@ namespace Data.Repositories
             get{ return _storeRepository ??= new StoreRepository(_context);}
         }
 
-        private IStatusRepository _statusRepository;
+        private IStatusRepository<Status> _statusRepository;
     
-         public IStatusRepository StatusRepository
+         public IStatusRepository<Status> StatusRepository
         {
             get{ return _statusRepository ??= new StatusRepository(_context);}
         }

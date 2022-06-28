@@ -8,11 +8,11 @@ namespace WebApi.Controllers
     [Route("api/")]
     public class StatusController : ControllerBase
     {
-        private readonly IStatusRepository _repository;
+        private readonly IStatusRepository<Status> _repository;
         private readonly IUnitOfWork _unitOfWork;
 
         public StatusController(
-            IStatusRepository requestHistoryRepository,
+            IStatusRepository<Status> requestHistoryRepository,
             IUnitOfWork unitOfWork)
         {
             this._repository = requestHistoryRepository;
@@ -38,6 +38,24 @@ namespace WebApi.Controllers
             }
 
             return Ok(statusListDTO);
+        }
+
+        [HttpGet("v1/status/{id:int}")]
+        public async Task<IActionResult> GetByIdAsync([FromRoute] int id)
+        {
+            var status = await _repository.GetByIdAsync(id);
+
+            if (status == null)
+                return NotFound();
+            else
+            {
+                var statusDTO = new StatusDTO()
+                {
+                    Id = status.Id,
+                    Name = status.Name
+                };
+                return Ok(statusDTO);
+            }
         }
     }
 }

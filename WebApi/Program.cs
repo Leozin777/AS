@@ -22,7 +22,7 @@ builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IRequestRepository, RequestRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();
-builder.Services.AddScoped<IStatusRepository, StatusRepository>();
+builder.Services.AddScoped<IStatusRepository<Status>, StatusRepository>();
 builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
