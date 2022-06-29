@@ -28,17 +28,29 @@ namespace WebApi.Controllers
 
             foreach (Product product in productsList)
             {
-                var productDTO = new ProductDTO()
+                if (product.SoldAmount == null)
                 {
-                    Id = product.Id,
-                    Price = product.Price,
-                    Name = product.Name,
-                    SoldAmount = product.SoldAmount,
-                    QuantityKgSold = product.QuantityKgSold,
-                    ItemId = product.ItemId
-                };
-
-                productsDTO.Add(productDTO);
+                    var productDTO = new ProductDTO()
+                    {
+                        Id = product.Id,
+                        Price = product.Price,
+                        Name = product.Name,
+                        QuantityKgSold = product.QuantityKgSold,
+                        ItemId = product.ItemId
+                    };
+                    productsDTO.Add(productDTO);
+                }else if (product.QuantityKgSold == null)
+                {
+                    var productDTO = new ProductDTO()
+                    {
+                        Id = product.Id,
+                        Price = product.Price,
+                        Name = product.Name,
+                        SoldAmount = product.SoldAmount,
+                        ItemId = product.ItemId
+                    };
+                    productsDTO.Add(productDTO);
+                }
             }
 
             return Ok(productsDTO);
@@ -53,16 +65,30 @@ namespace WebApi.Controllers
                 return NotFound();
             else
             {
-                var productDTO = new ProductDTO()
+                if (product.SoldAmount == null)
                 {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Price = product.Price,
-                    SoldAmount = product.SoldAmount,
-                    ItemId = product.ItemId
-                };
-
-                return Ok(productDTO);
+                    var productDTO = new ProductDTO()
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Price = product.Price,
+                        QuantityKgSold = product.QuantityKgSold,
+                        ItemId = product.ItemId
+                    };
+                    return Ok(productDTO);
+                }else
+                {
+                    var productDTO = new ProductDTO()
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Price = product.Price,
+                        SoldAmount = product.SoldAmount,
+                        QuantityKgSold = product.QuantityKgSold,
+                        ItemId = product.ItemId
+                    };
+                    return Ok(productDTO);
+                }
             }
         }
 
