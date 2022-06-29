@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Domain.Entities;
 
 namespace Data.Types
 {
@@ -16,24 +13,26 @@ namespace Data.Types
                 .HasColumnName("id");
 
             builder.HasKey(i => i.Id);
-
-            builder.Property(i => i.Name)
-                .HasColumnName("name")
-                .HasColumnType("VARCHAR")
-                .HasMaxLength(80)
+            
+            builder.Property(i => i.Amount)
+                .HasColumnName("amount")   
+                .HasColumnType("INT") 
                 .IsRequired();
-
+            
             builder.Property(i => i.Price)
                 .HasColumnName("price")   
-                .HasColumnType("DOUBLE") 
+                .HasColumnType("DECIMAL") 
+                .IsRequired();
+            
+            builder.Property(i => i.Missing)
+                .HasColumnName("missing")   
+                .HasColumnType("BOOLEAN") 
                 .IsRequired();
 
-            builder.Property(i => i.Link)
-                .HasColumnName("link")
-                .HasColumnType("VARCHAR")
-                .HasMaxLength(80)
-                .IsRequired();    
-
+            builder.HasOne(x => x.Request)
+                 .WithMany(x => x.Items)
+                 .HasConstraintName("FK_Requests_Client")
+                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

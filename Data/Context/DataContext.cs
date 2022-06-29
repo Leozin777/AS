@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Data.Types;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -15,12 +11,24 @@ namespace Data.Context
 
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Status> Status { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new ClientMap());
+            modelBuilder.ApplyConfiguration(new ItemMap());
+            modelBuilder.ApplyConfiguration(new RequestMap());
+            modelBuilder.ApplyConfiguration(new PaymentMap());
+            modelBuilder.ApplyConfiguration(new StoreMap());
+            modelBuilder.ApplyConfiguration(new ProductMap());
+            modelBuilder.ApplyConfiguration(new StatusMap());
         }
+
     }
 }

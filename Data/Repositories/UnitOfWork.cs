@@ -16,11 +16,11 @@ namespace Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        private IUserRepository _userRepository;
+        private IClientRepository _clientRepository;
 
-        public IUserRepository UserRepository
+        public IClientRepository ClientRepository
         {
-            get{ return _userRepository ??= new UserRepository(_context);}
+            get{ return _clientRepository ??= new ClientRepository(_context);}
         }
 
         private IItemRepository _itemRepository;
@@ -29,5 +29,39 @@ namespace Data.Repositories
         {
             get{ return _itemRepository ??= new ItemRepository(_context);}
         }
+
+        private IRequestRepository _requestRepository;
+
+        public IRequestRepository RequestRepository
+        {
+            get{ return _requestRepository ??= new RequestRepository(_context);}
+        }
+
+        private IProductRepository _productRepository;
+
+        public IProductRepository ProductRepository
+        {
+            get{ return _productRepository ??= new ProductRepository(_context);}
+        }
+
+        private IPaymentRepository _paymentRepository;
+        public IPaymentRepository PaymentRepository
+        {
+            get { return _paymentRepository ??= new PaymentRepository(_context);}
+        }
+
+        private IStoreRepository _storeRepository;
+         public IStoreRepository StoreRepository
+        {
+            get{ return _storeRepository ??= new StoreRepository(_context);}
+        }
+
+        private IStatusRepository _statusRepository;
+    
+         public IStatusRepository StatusRepository
+        {
+            get{ return _statusRepository ??= new StatusRepository(_context);}
+        }
+         
     }
 }
