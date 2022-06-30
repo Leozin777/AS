@@ -39,7 +39,7 @@ namespace WebApi.Controllers
                         ItemId = product.ItemId
                     };
                     productsDTO.Add(productDTO);
-                }else if (product.QuantityKgSold == null)
+                }else
                 {
                     var productDTO = new ProductDTO()
                     {
@@ -134,25 +134,48 @@ namespace WebApi.Controllers
                 return NotFound();
             else
             {
-                product.Name = model.Name;
-                product.Price = model.Price;
-                product.SoldAmount = model.SoldAmount;
-                product.QuantityKgSold = model.QuantityKgSold;
-                product.ItemId = model.ItemId;
+                if (product.SoldAmount == null)
+                {
+                    product.Name = model.Name;
+                    product.Price = model.Price;
+                    product.QuantityKgSold = model.QuantityKgSold;
+                    product.ItemId = model.ItemId; 
+                }
+                else
+                {
+                    product.Name = model.Name;
+                    product.Price = model.Price;
+                    product.SoldAmount = model.SoldAmount;
+                    product.ItemId = model.ItemId;
+                }
 
                 _repository.Update(product);
                 await _unitOfWork.CommitAsync();
 
-                var productDTO = new ProductDTO()
+                if (product.SoldAmount == null)
                 {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Price = product.Price,
-                    SoldAmount = product.SoldAmount,
-                    ItemId = product.ItemId
-                };
-
-                return Ok(productDTO);
+                    var productDTO = new ProductDTO()
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Price = product.Price,
+                        QuantityKgSold = product.QuantityKgSold,
+                        ItemId = product.ItemId
+                    }; 
+                    return Ok(productDTO);
+                }
+                else
+                {
+                    var productDTO = new ProductDTO()
+                    {
+                        Id = product.Id,
+                        Name = product.Name,
+                        Price = product.Price,
+                        SoldAmount = product.SoldAmount,
+                        ItemId = product.ItemId
+                    };
+                    return Ok(productDTO);
+                }
             }
         }
     }
