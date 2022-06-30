@@ -16,15 +16,18 @@ namespace Data.Context
         public DbSet<Request> Requests { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<RequestHistory> RequestsHistory { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Status> Status { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ClientMap());
             modelBuilder.ApplyConfiguration(new ItemMap());
             modelBuilder.ApplyConfiguration(new RequestMap());
+            modelBuilder.ApplyConfiguration(new PaymentMap());
             modelBuilder.ApplyConfiguration(new StoreMap());
-            modelBuilder.ApplyConfiguration(new RequestHistoryMap());
+            modelBuilder.ApplyConfiguration(new ProductMap());
+            modelBuilder.ApplyConfiguration(new StatusMap());
         }
 
     }

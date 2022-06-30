@@ -60,7 +60,6 @@ namespace WebApi.Controllers
                     PhoneNumber = client.PhoneNumber,
                     CPF = client.CPF,
                     DateLastPurchase = client.DateLastPurchase,
-                    Requests = client.Requests
                 };
 
                 return Ok(clientDTO);
@@ -117,7 +116,10 @@ namespace WebApi.Controllers
                 var clientDTO = new ClientDTO()
                 {
                     Id = client.Id,
-                    PhoneNumber = client.PhoneNumber
+                    Name = client.Name,
+                    PhoneNumber = client.PhoneNumber,
+                    CPF = client.CPF,
+                    DateLastPurchase = client.DateLastPurchase
                 };
 
                 return Ok(clientDTO);

@@ -14,20 +14,14 @@ namespace Data.Types
 
             builder.HasKey(i => i.Id);
 
-            builder.Property(i => i.Status)
-                .HasColumnName("status")
-                .HasColumnType("VARCHAR")
-                .HasMaxLength(80)
-                .IsRequired();
-
             builder.Property(i => i.AmountItems)
                 .HasColumnName("amountItems")
-                .HasColumnType("DOUBLE")
+                .HasColumnType("DECIMAL")
                 .IsRequired();
 
             builder.Property(i => i.RequestDate)
                 .HasColumnName("requestDate")
-                .HasColumnType("SMALLDATETIME")
+                .HasColumnType("DATE")
                 .IsRequired();
 
             builder.HasOne(x => x.Client)
@@ -40,10 +34,16 @@ namespace Data.Types
                 .HasConstraintName("FK_Requests_Store")
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(x => x.RequestHistory)
+            builder.HasOne(x => x.Payment)
                 .WithMany(x => x.Requests)
-                .HasConstraintName("FK_Requests_RequestHistory")
+                .HasConstraintName("FK_Requests_Payment")
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(x => x.Status)
+                .WithMany(x => x.Requests)
+                .HasConstraintName("FK_Requests_Status")
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
+

@@ -13,16 +13,26 @@ namespace Data.Types
                 .HasColumnName("id");
 
             builder.HasKey(i => i.Id);
-
+            
+            builder.Property(i => i.Amount)
+                .HasColumnName("amount")   
+                .HasColumnType("INT") 
+                .IsRequired();
+            
             builder.Property(i => i.Price)
                 .HasColumnName("price")   
-                .HasColumnType("DOUBLE") 
+                .HasColumnType("DECIMAL") 
+                .IsRequired();
+            
+            builder.Property(i => i.Missing)
+                .HasColumnName("missing")   
+                .HasColumnType("BOOLEAN") 
                 .IsRequired();
 
-            // builder.HasOne(x => x.Client)
-            //     .WithMany(x => x.Requests)
-            //     .HasConstraintName("FK_Requests_Client")
-            //     .OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Request)
+                 .WithMany(x => x.Items)
+                 .HasConstraintName("FK_Requests_Client")
+                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

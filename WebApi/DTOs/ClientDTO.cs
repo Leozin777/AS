@@ -9,7 +9,6 @@ namespace WebApi.DTOs
         public string PhoneNumber { get; set; }
         public string CPF { get; set; }
         public DateTime DateLastPurchase { get; set; } //Data da última compra
-        public List<Request> Requests { get; set; }
 
     }
 }

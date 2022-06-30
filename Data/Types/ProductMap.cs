@@ -16,7 +16,7 @@ namespace Data.Types
 
             builder.Property(i => i.Price)
             .HasColumnName("price")
-            .HasColumnType("DOUBLE")
+            .HasColumnType("DECIMAL")
             .IsRequired();
             
             builder.Property(i => i.Name)
@@ -26,14 +26,12 @@ namespace Data.Types
             .IsRequired();
 
             builder.Property(i => i.SoldAmount)
-            .HasColumnName("soldAmount")
-            .HasColumnType("INT")
-            .IsRequired();
+                .HasColumnName("soldAmount")
+                .HasColumnType("INT");
 
             builder.Property(i => i.QuantityKgSold)
-            .HasColumnName("quantityKgSold")
-            .HasColumnType("DOUBLE")
-            .IsRequired();
+                .HasColumnName("quantityKgSold")
+                .HasColumnType("DECIMAL");
 
             builder.HasOne(x => x.Item)
             .WithMany(x => x.Products)

@@ -1,4 +1,5 @@
 using Data.Context;
+using Domain.Entities;
 using Domain.Interfaces;
 
 namespace Data.Repositories
@@ -44,17 +45,24 @@ namespace Data.Repositories
             get{ return _productRepository ??= new ProductRepository(_context);}
         }
 
+        private IPaymentRepository _paymentRepository;
+        public IPaymentRepository PaymentRepository
+        {
+            get { return _paymentRepository ??= new PaymentRepository(_context);}
+        }
+
         private IStoreRepository _storeRepository;
          public IStoreRepository StoreRepository
         {
             get{ return _storeRepository ??= new StoreRepository(_context);}
         }
 
-        private IRequestHistoryRepository _requestHistoryRepository;
+        private IStatusRepository<Status> _statusRepository;
     
-         public IRequestHistoryRepository RequestHistoryRepository
+         public IStatusRepository<Status> StatusRepository
         {
-            get{ return _requestHistoryRepository ??= new RequestHistoryRepository(_context);}
+            get{ return _statusRepository ??= new StatusRepository(_context);}
         }
+         
     }
 }

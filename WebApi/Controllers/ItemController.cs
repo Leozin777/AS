@@ -32,12 +32,10 @@ namespace WebApi.Controllers
                 var itemDTO = new ItemDTO()
                 {
                     Id = item.Id,
-                    Products = item.Products,
                     Amount = item.Amount,
                     Price = item.Price,
-                    Request = item.Request,
-                    Missing = item.Missing
-
+                    Missing = item.Missing,
+                    RequestId = item.RequestId,
                 };
 
                 itemsDTO.Add(itemDTO);
@@ -59,11 +57,10 @@ namespace WebApi.Controllers
                 var itemDTO = new ItemDTO()
                 {
                     Id = item.Id,
-                    Products = item.Products,
                     Amount = item.Amount,
                     Price = item.Price,
-                    Request = item.Request,
-                    Missing = item.Missing
+                    Missing = item.Missing,
+                    RequestId = item.RequestId
                 };
 
                 return Ok(itemDTO);
@@ -75,11 +72,10 @@ namespace WebApi.Controllers
         {
             var item = new Item
             {
-                Products = model.Products,
                 Amount = model.Amount,
                 Price = model.Price,
-                Request = model.Request,
-                Missing = model.Missing
+                Missing = model.Missing,
+                RequestId = model.RequestId
             };
 
             _repository.Save(item);
@@ -112,21 +108,19 @@ namespace WebApi.Controllers
                 return NotFound();
             else
             {
-                item.Products = model.Products;
                 item.Amount = model.Amount;
                 item.Price = model.Price;
-                item.Request = model.Request;
                 item.Missing = model.Missing;
+                item.RequestId = model.RequestId;
 
                 _repository.Update(item);
                 await _unitOfWork.CommitAsync();
 
                 var itemDTO = new ItemDTO()
                 {
-                    Products = model.Products,
                     Amount = model.Amount,
                     Price = model.Price,
-                    Request = model.Request,
+                    RequestId = model.RequestId,
                     Missing = model.Missing
                 };
 

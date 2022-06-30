@@ -14,7 +14,8 @@ namespace WebApi.Controllers
 
         public RequestController(
             IRequestRepository requestRepository,
-            IUnitOfWork unitOfWork)
+            IUnitOfWork unitOfWork
+            )
         {
             this._repository = requestRepository;
             this._unitOfWork = unitOfWork;
@@ -32,12 +33,12 @@ namespace WebApi.Controllers
                 var requestDTO = new RequestDTO()
                 {
                     Id = request.Id,
-                    Status = request.Status,
                     AmountItems = request.AmountItems,
                     RequestDate = request.RequestDate,
-                    Client = request.Client,
                     ClientId = request.ClientId,
-                    Items = request.Items
+                    StoreId = request.StoreId,
+                    PaymentId = request.PaymentId,
+                    StatusId = request.StatusId
                 };
 
                 requestsDTO.Add(requestDTO);
@@ -58,12 +59,12 @@ namespace WebApi.Controllers
                 var requestDTO = new RequestDTO()
                 {
                     Id = request.Id,
-                    Status = request.Status,
                     AmountItems = request.AmountItems,
                     RequestDate = request.RequestDate,
-                    Client = request.Client,
                     ClientId = request.ClientId,
-                    Items = request.Items
+                    StoreId = request.StoreId,
+                    PaymentId = request.PaymentId,
+                    StatusId = request.StatusId
                 };
 
                 return Ok(requestDTO);
@@ -71,18 +72,17 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("v1/requests")]
-        public async Task<IActionResult> PostAsync([FromBody] RequestViewModelPost model)
+        public async Task<IActionResult> PostAsync([FromBody] RequestViewModel model)
         {
             var request = new Request
             {
-                Status = model.Status,
                 AmountItems = model.AmountItems,
                 RequestDate = model.RequestDate,
-                Client = model.Client,
                 ClientId = model.ClientId,
-                Items = model.Items
+                StoreId = model.StoreId,
+                PaymentId = model.PaymentId,
+                StatusId = model.StatusId
             };
-
             _repository.Save(request);
             await _unitOfWork.CommitAsync();
 
@@ -105,7 +105,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPatch("v1/requests/{id:int}")] 
-        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] RequestViewModelPatch model)
+        public async Task<IActionResult> PutAsync([FromRoute] int id, [FromBody] RequestViewModel model)
         {
             var request = await _repository.GetByIdAsync(id);
 
@@ -113,11 +113,12 @@ namespace WebApi.Controllers
                 return NotFound();
             else
             {
-                request.Status = model.Status;
                 request.AmountItems = model.AmountItems;
-                request.Client = model.Client;
+                request.RequestDate = model.RequestDate;
                 request.ClientId = model.ClientId;
-                request.Items = model.Items;
+                request.StoreId = model.StoreId;
+                request.PaymentId = model.PaymentId;
+                request.StatusId = model.StatusId;
 
                 _repository.Update(request);
                 await _unitOfWork.CommitAsync();
@@ -125,12 +126,12 @@ namespace WebApi.Controllers
                 var requestDTO = new RequestDTO()
                 {
                     Id = request.Id,
-                    Status = request.Status,
                     AmountItems = request.AmountItems,
                     RequestDate = request.RequestDate,
-                    Client = request.Client,
                     ClientId = request.ClientId,
-                    Items = request.Items
+                    StoreId = request.StoreId,
+                    PaymentId = request.PaymentId,
+                    StatusId = request.StatusId
                 };
 
                 return Ok(requestDTO);

@@ -1,4 +1,6 @@
 
+using Domain.Entities;
+
 namespace Domain.Interfaces
 {
     public interface IUnitOfWork
@@ -10,7 +12,7 @@ namespace Domain.Interfaces
         IStoreRepository StoreRepository { get;}
         IRequestRepository RequestRepository {get;}
         IProductRepository ProductRepository {get;}
-        
-        IRequestHistoryRepository RequestHistoryRepository {get;}
+        IPaymentRepository PaymentRepository {get; }
+        IStatusRepository<Status> StatusRepository {get;}
     }
 }
